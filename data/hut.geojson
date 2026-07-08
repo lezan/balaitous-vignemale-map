@@ -1,0 +1,19 @@
+{
+"type": "FeatureCollection",
+"name": "hut",
+"features": [
+{"type":"Feature","properties":{"name":"Refuge Wallon - Marcadau"},"geometry":{"type":"Point","coordinates":[-0.1947114,42.8200994]}},
+{"type":"Feature","properties":{"name":"Refuge des Oulettes de Gaube"},"geometry":{"type":"Point","coordinates":[-0.1414202,42.792918]}},
+{"type":"Feature","properties":{"name":"Refuge de Migouélou"},"geometry":{"type":"Point","coordinates":[-0.2990288,42.8857273]}},
+{"type":"Feature","properties":{"name":"Refuge du Balaïtous-Ledormeur"},"geometry":{"type":"Point","coordinates":[-0.2645178,42.8555439]}},
+{"type":"Feature","properties":{"name":"Refugio de Respomuso"},"geometry":{"type":"Point","coordinates":[-0.2876545,42.8169702]}},
+{"type":"Feature","properties":{"name":"Refugio de los Ibones de Bachimaña"},"geometry":{"type":"Point","coordinates":[-0.2275882,42.7799708]}},
+{"type":"Feature","properties":{"name":"Refuge de Larribet"},"geometry":{"type":"Point","coordinates":[-0.288841,42.8582075]}},
+{"type":"Feature","properties":{"name":"Refuge de Bayssellance"},"geometry":{"type":"Point","coordinates":[-0.1241898,42.7793892]}},
+{"type":"Feature","properties":{"name":"Refugio Casa de Piedra"},"geometry":{"type":"Point","coordinates":[-0.2335236,42.7626575]}},
+{"type":"Feature","properties":{"name":"Refuge d'Arrémoulit"},"geometry":{"type":"Point","coordinates":[-0.3291594,42.8460496]}},
+{"type":"Feature","properties":{"name":"Refuge d'Ilhéou"},"geometry":{"type":"Point","coordinates":[-0.1734935,42.8662047]}},
+{"type":"Feature","properties":{"name":"Chalet du Clot"},"geometry":{"type":"Point","coordinates":[-0.1472555,42.8519137]}},
+{"type":"Feature","properties":{"name":"Refuge d'Estom"},"geometry":{"type":"Point","coordinates":[-0.0990551,42.8079437]}}
+]
+}

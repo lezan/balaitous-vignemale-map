@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "hut_plus",
+"features": [
+{"type":"Feature","properties":{"name":"Cabane du Pinet"},"geometry":{"type":"Point","coordinates":[-0.1377974,42.8237181]}},
+{"type":"Feature","properties":{"name":"Cabane du Plaa de Prat"},"geometry":{"type":"Point","coordinates":[-0.2287257,42.8607717]}},
+{"type":"Feature","properties":{"name":"Chalet del Ingeniero"},"geometry":{"type":"Point","coordinates":[-0.3156927,42.7970715]}},
+{"type":"Feature","properties":{"name":"Cabane de Lourdes"},"geometry":{"type":"Point","coordinates":[-0.0919988,42.745299]}},
+{"type":"Feature","properties":{"name":"Cabane de l'Orri"},"geometry":{"type":"Point","coordinates":[-0.3488076,42.8940623]}},
+{"type":"Feature","properties":{"name":"Cabane du Marcadau"},"geometry":{"type":"Point","coordinates":[-0.1672818,42.8467022]}},
+{"type":"Feature","properties":{"name":"Cabane de Pouey Caut"},"geometry":{"type":"Point","coordinates":[-0.0961229,42.8292372]}},
+{"type":"Feature","properties":{"name":"Cabaña de Cerbillonar"},"geometry":{"type":"Point","coordinates":[-0.1526307,42.748606]}},
+{"type":"Feature","properties":{"name":"Cabane Fruitiere - cauterets"},"geometry":{"type":"Point","coordinates":[-0.096023,42.846882]}},
+{"type":"Feature","properties":{"name":"Cabane de Estom"},"geometry":{"type":"Point","coordinates":[-0.1012311,42.808037]}}
+]
+}

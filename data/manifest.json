@@ -1,0 +1,68 @@
+[
+  {
+    "id": "area1",
+    "label": "Zone 1",
+    "url": "data/area1.geojson",
+    "featureCount": 1
+  },
+  {
+    "id": "border",
+    "label": "Fronti\u00e8re",
+    "url": "data/border.geojson",
+    "featureCount": 1
+  },
+  {
+    "id": "glacier",
+    "label": "Glacier",
+    "url": "data/glacier.geojson",
+    "featureCount": 37
+  },
+  {
+    "id": "lake",
+    "label": "Lac",
+    "url": "data/lake.geojson",
+    "featureCount": 93
+  },
+  {
+    "id": "river",
+    "label": "Rivi\u00e8re",
+    "url": "data/river.geojson",
+    "featureCount": 11
+  },
+  {
+    "id": "stream",
+    "label": "Ruisseau",
+    "url": "data/stream.geojson",
+    "featureCount": 251
+  },
+  {
+    "id": "hut",
+    "label": "Refuge",
+    "url": "data/hut.geojson",
+    "featureCount": 13
+  },
+  {
+    "id": "hot_plus",
+    "label": "Refuge plus",
+    "url": "data/hot_plus.geojson",
+    "featureCount": 10
+  },
+  {
+    "id": "mountain_pass",
+    "label": "Col",
+    "url": "data/mountain_pass.geojson",
+    "featureCount": 46
+  },
+  {
+    "id": "peak",
+    "label": "Sommet",
+    "url": "data/peak.geojson",
+    "featureCount": 79
+  },
+  {
+    "id": "main_peak",
+    "label": "Sommet principal",
+    "url": "data/main_peak.geojson",
+    "featureCount": 10
+  }
+]

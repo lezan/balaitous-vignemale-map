@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Balaitous - Vignemale web map</title>
+    <link
+      rel="stylesheet"
+      href="vendor/leaflet/leaflet.css"
+    >
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .leaflet-control-layers,
+      .leaflet-popup-content-wrapper {
+        border-radius: 6px;
+      }
+
+      .map-title {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 6px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        color: #1f2933;
+        line-height: 1.25;
+        padding: 10px 12px;
+      }
+
+      .map-title strong {
+        display: block;
+        font-size: 15px;
+      }
+
+      .map-title span {
+        color: #52606d;
+        display: block;
+        font-size: 12px;
+        margin-top: 2px;
+      }
+
+      .opacity-control {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 6px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        color: #1f2933;
+        padding: 9px 10px 10px;
+        width: 180px;
+      }
+
+      .opacity-control label {
+        display: flex;
+        font-size: 12px;
+        font-weight: 600;
+        justify-content: space-between;
+        margin-bottom: 6px;
+      }
+
+      .opacity-control input {
+        display: block;
+        width: 100%;
+      }
+
+      .triangle-marker,
+      .main-triangle-marker {
+        background: transparent;
+        border: 0;
+      }
+
+      .triangle-marker::before,
+      .main-triangle-marker::before {
+        content: "";
+        display: block;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+        height: 0;
+        width: 0;
+      }
+
+      .triangle-marker::before {
+        border-bottom: 13px solid #16a34a;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+      }
+
+      .main-triangle-marker::before {
+        border-bottom: 17px solid #166534;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+      }
+
+      .popup-table {
+        border-collapse: collapse;
+        min-width: 190px;
+      }
+
+      .popup-table th,
+      .popup-table td {
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 12px;
+        padding: 4px 0;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .popup-table th {
+        color: #52606d;
+        font-weight: 600;
+        padding-right: 12px;
+        white-space: nowrap;
+      }
+
+      .popup-empty {
+        color: #52606d;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script
+      src="vendor/leaflet/leaflet.js"
+    ></script>
+    <script>
+      const map = L.map("map", {
+        zoomControl: true,
+      }).setView([42.78, -0.14], 10);
+
+      const osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      const topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+        maxZoom: 17,
+        attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, SRTM | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
+      });
+      let activeBaseLayer = osm;
+      let baseOpacity = 1;
+
+      const baseLayers = {
+        OpenStreetMap: osm,
+        OpenTopoMap: topo,
+      };
+      const overlayLayers = {};
+      const allBounds = L.latLngBounds();
+
+      const styles = {
+        area1: { color: "#78350f", weight: 2, opacity: 0.95, fillColor: "#facc15", fillOpacity: 0.16 },
+        border: { color: "#111827", weight: 3, opacity: 0.9, dashArray: "8 5" },
+        glacier: { color: "#38bdf8", weight: 1, opacity: 0.85, fillColor: "#bae6fd", fillOpacity: 0.55 },
+        lake: { color: "#2563eb", weight: 1, opacity: 0.9, fillColor: "#60a5fa", fillOpacity: 0.55 },
+        river: { color: "#1d4ed8", weight: 3, opacity: 0.9 },
+        stream: { color: "#38bdf8", weight: 1.5, opacity: 0.85 },
+      };
+
+      const svgIcons = {
+        hut: L.icon({
+          iconUrl: "assets/icons/hut.svg",
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+          popupAnchor: [0, -8],
+        }),
+        hot_plus: L.icon({
+          iconUrl: "assets/icons/hut_plus.svg",
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+          popupAnchor: [0, -8],
+        }),
+        mountain_pass: L.icon({
+          iconUrl: "assets/icons/mountain_pass.svg",
+          iconSize: [14, 14],
+          iconAnchor: [7, 7],
+          popupAnchor: [0, -7],
+        }),
+      };
+
+      const triangleIcons = {
+        peak: L.divIcon({
+          className: "triangle-marker",
+          iconSize: [14, 13],
+          iconAnchor: [7, 13],
+          popupAnchor: [0, -13],
+        }),
+        main_peak: L.divIcon({
+          className: "main-triangle-marker",
+          iconSize: [18, 17],
+          iconAnchor: [9, 17],
+          popupAnchor: [0, -17],
+        }),
+      };
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function popupHtml(properties) {
+        const entries = Object.entries(properties).filter(([, value]) => value !== null && value !== "");
+        if (!entries.length) {
+          return '<span class="popup-empty">Aucun attribut disponible</span>';
+        }
+
+        const rows = entries
+          .map(([key, value]) => `<tr><th>${escapeHtml(key)}</th><td>${escapeHtml(value)}</td></tr>`)
+          .join("");
+        return `<table class="popup-table">${rows}</table>`;
+      }
+
+      const title = L.control({ position: "topleft" });
+      title.onAdd = function () {
+        const div = L.DomUtil.create("div", "map-title");
+        div.innerHTML = "<strong>Balaitous - Vignemale</strong><span>Données thématiques sur fond OSM</span>";
+        return div;
+      };
+      title.addTo(map);
+
+      const opacityControl = L.control({ position: "bottomleft" });
+      opacityControl.onAdd = function () {
+        const div = L.DomUtil.create("div", "opacity-control");
+        div.innerHTML = `
+          <label for="base-opacity">
+            <span>Opacité du fond</span>
+            <span id="base-opacity-value">100%</span>
+          </label>
+          <input id="base-opacity" type="range" min="0.2" max="1" step="0.05" value="1">
+        `;
+        L.DomEvent.disableClickPropagation(div);
+        L.DomEvent.disableScrollPropagation(div);
+
+        const input = div.querySelector("#base-opacity");
+        const value = div.querySelector("#base-opacity-value");
+        input.addEventListener("input", () => {
+          baseOpacity = Number(input.value);
+          activeBaseLayer.setOpacity(baseOpacity);
+          value.textContent = `${Math.round(baseOpacity * 100)}%`;
+        });
+
+        return div;
+      };
+      opacityControl.addTo(map);
+
+      map.on("baselayerchange", (event) => {
+        activeBaseLayer = event.layer;
+        activeBaseLayer.setOpacity(baseOpacity);
+      });
+
+      async function addLayer(layerInfo) {
+        const response = await fetch(layerInfo.url);
+        if (!response.ok) {
+          throw new Error(`Impossibile caricare ${layerInfo.url}`);
+        }
+
+        const data = await response.json();
+        const layer = L.geoJSON(data, {
+          style: () => styles[layerInfo.id] || { color: "#111827", weight: 2, opacity: 0.8 },
+          pointToLayer: (feature, latlng) => {
+            if (svgIcons[layerInfo.id]) {
+              return L.marker(latlng, { icon: svgIcons[layerInfo.id] });
+            }
+
+            if (triangleIcons[layerInfo.id]) {
+              return L.marker(latlng, { icon: triangleIcons[layerInfo.id] });
+            }
+
+            return L.circleMarker(latlng, {
+              radius: 5,
+              color: "#111827",
+              fillColor: "#ffffff",
+              fillOpacity: 0.9,
+              weight: 1,
+            });
+          },
+          onEachFeature: (feature, featureLayer) => {
+            featureLayer.bindPopup(popupHtml(feature.properties || {}));
+          },
+        });
+
+        overlayLayers[`${layerInfo.label} (${layerInfo.featureCount})`] = layer;
+        layer.addTo(map);
+
+        if (layer.getBounds && layer.getBounds().isValid()) {
+          allBounds.extend(layer.getBounds());
+        }
+      }
+
+      async function init() {
+        const response = await fetch("data/manifest.json");
+        const manifest = await response.json();
+        await Promise.all(manifest.map(addLayer));
+
+        L.control.layers(baseLayers, overlayLayers, { collapsed: false }).addTo(map);
+
+        if (allBounds.isValid()) {
+          map.fitBounds(allBounds.pad(0.08));
+        }
+      }
+
+      init().catch((error) => {
+        console.error(error);
+        alert("Erreur lors du chargement des données de la carte.");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "main-peak",
+"features": [
+{"type":"Feature","properties":{"name":"Le Lurien","ele":2826},"geometry":{"type":"Point","coordinates":[-0.3503717,42.8572736]}},
+{"type":"Feature","properties":{"name":"Pic Palas","ele":2974},"geometry":{"type":"Point","coordinates":[-0.3132706,42.8494128]}},
+{"type":"Feature","properties":{"name":"Pico d'Arriel","ele":2834},"geometry":{"type":"Point","coordinates":[-0.3312942,42.8341154]}},
+{"type":"Feature","properties":{"name":"Pic du Balaitous","ele":3146},"geometry":{"type":"Point","coordinates":[-0.2902515,42.8389351]}},
+{"type":"Feature","properties":{"name":"Pico Argualas","ele":3044},"geometry":{"type":"Point","coordinates":[-0.2668988,42.7664834]}},
+{"type":"Feature","properties":{"name":"Grand Pic de Tapou","ele":3151},"geometry":{"type":"Point","coordinates":[-0.1358366,42.7627843]}},
+{"type":"Feature","properties":{"name":"Col de Tentes","ele":2208},"geometry":{"type":"Point","coordinates":[-0.0506337,42.7137693]}},
+{"type":"Feature","properties":{"name":"Pointe Aires","ele":3028},"geometry":{"type":"Point","coordinates":[0.1352268,42.7272775]}},
+{"type":"Feature","properties":{"name":"Pic de Serre de Mourène","ele":3090},"geometry":{"type":"Point","coordinates":[0.135308,42.72074]}},
+{"type":"Feature","properties":{"name":"Punda deras Solas","ele":3022},"geometry":{"type":"Point","coordinates":[0.0534764,42.6621876]}}
+]
+}
