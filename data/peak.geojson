@@ -61,7 +61,7 @@
 {"type":"Feature","properties":{"name":"Petite Fache","ele":2947},"geometry":{"type":"Point","coordinates":[-0.2356791,42.8178992]}},
 {"type":"Feature","properties":{"name":"Punta Baldierra","ele":2918},"geometry":{"type":"Point","coordinates":[-0.2404288,42.8187269]}},
 {"type":"Feature","properties":{"name":"Pico de Cambalés","ele":2965},"geometry":{"type":"Point","coordinates":[-0.2435613,42.8236156]}},
-{"type":"Feature","properties":{"name":"Demeure Lagarat","ele":2890},"geometry":{"type":"Point","coordinates":[-0.2747561,42.8283739]}},
+{"type":"Feature","properties":{"name":"Gavizo-Cristail","ele":2890},"geometry":{"type":"Point","coordinates":[-0.2747561,42.8283739]}},
 {"type":"Feature","properties":{"name":"Pico Soulano","ele":2911},"geometry":{"type":"Point","coordinates":[-0.2755296,42.8332768]}},
 {"type":"Feature","properties":{"name":"Demeure Soulé","ele":2931},"geometry":{"type":"Point","coordinates":[-0.2760971,42.8344624]}},
 {"type":"Feature","properties":{"name":"Pointe de la Défaite","ele":2903},"geometry":{"type":"Point","coordinates":[-0.2780519,42.8356818]}},
